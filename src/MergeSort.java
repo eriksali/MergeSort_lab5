@@ -61,8 +61,57 @@ public class MergeSort {
     }
 
 
+    public static void mergeSort(int[] a, int n) {
+        if (n < 2) {
+            return;
+        }
+        int mid = n / 2;
+        int[] l = new int[mid];
+        int[] r = new int[n - mid];
+    
+        for (int i = 0; i < mid; i++) {
+            l[i] = a[i];
+        }
+        for (int i = mid; i < n; i++) {
+            r[i - mid] = a[i];
+        }
+        mergeSort(l, mid);
+        mergeSort(r, n - mid);
+    
+        merge(a, l, r, mid, n - mid);
+    } 
 
-    public static void merge(int[] left_arr,int[] right_arr, int[] arr,int left_size, int right_size){
+    public static void merge(int[] a, int[] l, int[] r, int left, int right) {
+        
+        int i = 0, j = 0, k = 0;
+        while (i < left && j < right) {
+            if (l[i] <= r[j]) {
+                a[k++] = l[i++];
+            }
+            else {
+                a[k++] = r[j++];
+            }
+        }
+        while (i < left) {
+            a[k++] = l[i++];
+        }
+        while (j < right) {
+            a[k++] = r[j++];
+        }
+    }
+
+}
+
+
+    /**
+     * 
+     * @param left_arr
+     * @param right_arr
+     * @param arr
+     * @param left_size
+     * @param right_size
+     * 
+     * public static void merge(int[] left_arr,int[] right_arr, int[] arr,int left_size, int right_size){
         
         int i=0,l=0,r = 0;
         //The while loops check the conditions for merging
@@ -107,7 +156,7 @@ public class MergeSort {
       // Calling the merge method on each subdivision
         merge(left_arr,right_arr,arr,mid,len-mid);
     }
- 
+  */
     /** 
      * 
      *     public static void main( String args[] ) {
@@ -118,5 +167,7 @@ public class MergeSort {
           }
       }
     */
+    
+    
 
-  }
+ 
